@@ -1,0 +1,32 @@
+{
+  "id": "host-design",
+  "revision": 1,
+  "title": "选择主播角色设计",
+  "notice": "这些都是按本期风格原创的角色，未参照任何现有角色或真人。选定后会以它作为母版立绘，后续所有表情差分都从母版编辑生成，保证同一个角色前后一致。",
+  "body": "每套设计包含主播 A 和主播 B 两位角色：左图是待机状态，右图是同一角色的微笑差分，用来检查表情变化后脸是否还是同一个人。图片均为透明背景，已放在所选演播室风格的配色里预览。",
+  "candidates": [
+    {
+      "id": "cast-1",
+      "label": "设计 1 · 软萌蓝 + 知性白",
+      "description": "主播 A：浅蓝短发，戴耳机，说话声线可爱。主播 B：银白长发，穿西装马甲，气质成熟。",
+      "media": ["assets/art/candidates/cast-1-a.png", "assets/art/candidates/cast-1-b.png"],
+      "recommended": true
+    },
+    {
+      "id": "cast-2",
+      "label": "设计 2 · 运动风搭档",
+      "description": "两人穿同款卫衣、配色互补，发型一长一短，适合轻松闲聊的节奏。",
+      "media": ["assets/art/candidates/cast-2-a.png", "assets/art/candidates/cast-2-b.png"]
+    },
+    {
+      "id": "cast-3",
+      "label": "设计 3 · 新闻主播正装",
+      "description": "正装、站姿端正，表情幅度较克制，适合信息密度高的讲解。",
+      "media": ["assets/art/candidates/cast-3-a.png", "assets/art/candidates/cast-3-b.png"]
+    }
+  ],
+  "options": [
+    { "id": "use", "label": "采用所选设计" },
+    { "id": "more", "label": "再出几套", "without_candidate": true }
+  ]
+}

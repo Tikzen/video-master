@@ -1,0 +1,32 @@
+{
+  "id": "studio-look",
+  "revision": 1,
+  "title": "选择演播室风格",
+  "notice": "每个候选都是真实渲染出的演播室画面，不是色板。请不要直接套用模板布景：被选中的方案会继续细化，直到达到成片质量。",
+  "body": "下面三套演播室都按本期主题和主播配色设计，三套之间的差异在于整体气质。每张卡片包含宽景和推屏两帧，可以看出布景层次、大屏证据区、字幕区和主播站位。选定后 Agent 会以它为准制作全片；如果都不满意，选“再出几套”，并在下面写明原因。",
+  "candidates": [
+    {
+      "id": "look-a",
+      "label": "A · 蓝白云朵直播间",
+      "description": "蓝白主色，配奶油高光；圆角大屏，背景有柔和的云朵与星点灯串，前景是低矮的弧形主播台。氛围活泼可爱，元素多但层次清楚。",
+      "media": ["renders/preview/studio-look-a-wide.png", "renders/preview/studio-look-a-screen.png"],
+      "recommended": true
+    },
+    {
+      "id": "look-b",
+      "label": "B · 晨光玻璃新闻厅",
+      "description": "浅天蓝配白色磨砂玻璃隔断，暖色晨光从侧窗斜射进来；大屏是透明 LED 风格，整体干净专业，带一点温度。",
+      "media": ["renders/preview/studio-look-b-wide.png", "renders/preview/studio-look-b-screen.png"]
+    },
+    {
+      "id": "look-c",
+      "label": "C · 纸艺手作工作台",
+      "description": "白色卡纸与蓝色描边层层叠出布景，背景墙贴着便签和手绘图标，大屏像一块装裱过的画板，整体有手作感、亲切。",
+      "media": ["renders/preview/studio-look-c-wide.png", "renders/preview/studio-look-c-screen.png"]
+    }
+  ],
+  "options": [
+    { "id": "use", "label": "采用所选风格" },
+    { "id": "more", "label": "都不满意，再出几套", "without_candidate": true }
+  ]
+}

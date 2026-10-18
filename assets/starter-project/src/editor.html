@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video Master Timeline</title>
+    <link rel="stylesheet" href="/src/editor.css" />
+    <script defer src="/vendor/lucide.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Video Master 首页">
+          <span class="brand-mark">VM</span>
+          <span>VIDEO MASTER</span>
+        </a>
+        <div class="project-title">
+          <strong id="project-name">Untitled Motion</strong>
+          <span id="save-state">已保存</span>
+        </div>
+        <div class="top-actions">
+          <span id="render-status" class="render-status" aria-live="polite"></span>
+          <button id="image-tool-button" class="icon-button" type="button" aria-label="生图工具" title="生图工具"><i data-lucide="image-plus"></i></button>
+          <button id="voice-tool-button" class="icon-button" type="button" aria-label="配音工具" title="配音工具"><i data-lucide="mic"></i></button>
+          <a class="icon-button" href="/create?panel=music" target="_blank" rel="noopener" aria-label="配乐工具" title="配乐工具"><i data-lucide="music-2"></i></a>
+          <a class="icon-button" href="/create?panel=quality" target="_blank" rel="noopener" aria-label="美学与目标自测（实验性）" title="美学与目标自测（实验性）"><i data-lucide="scan-eye"></i></a>
+          <a class="icon-button" href="/create" aria-label="创作向导" title="创作向导"><i data-lucide="workflow"></i></a>
+          <button id="plan-button" class="button button-quiet" type="button"><i data-lucide="list-checks"></i>制作方案</button>
+          <button id="render-button" class="button button-primary" type="button"><i data-lucide="clapperboard"></i>渲染 MP4</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="viewer-column" aria-label="画面预览">
+          <div class="viewer-topline">
+            <div>
+              <span class="eyebrow">PROGRAM MONITOR</span>
+              <span id="scene-name" class="scene-name">序幕</span>
+            </div>
+            <span id="frame-readout" class="frame-readout">1280 × 720 · 30 fps</span>
+          </div>
+          <p class="agent-help">不会用？可以直接让你的Agent操作！</p>
+          <div class="monitor">
+            <canvas id="scene-canvas" width="1280" height="720" aria-label="当前视频画面"></canvas>
+          </div>
+          <div class="transport">
+            <button id="go-start" class="icon-button" type="button" aria-label="回到开头" title="回到开头"><i data-lucide="skip-back"></i></button>
+            <button id="step-back" class="icon-button" type="button" aria-label="上一帧" title="上一帧"><i data-lucide="chevron-left"></i></button>
+            <button id="play-toggle" class="icon-button play-button" type="button" aria-label="播放" title="播放"><i data-lucide="play"></i></button>
+            <button id="step-forward" class="icon-button" type="button" aria-label="下一帧" title="下一帧"><i data-lucide="chevron-right"></i></button>
+            <span id="time-readout" class="time-readout">00:00:00:00</span>
+            <span class="transport-spacer"></span>
+            <span id="duration-readout" class="muted">00:00:08:00</span>
+          </div>
+        </section>
+
+        <aside class="inspector" aria-label="片段属性">
+          <div class="panel-heading">
+            <span class="eyebrow">检查器</span>
+            <span id="selected-kind" class="kind-label">未选择片段</span>
+          </div>
+          <label class="inspector-field"><span class="field-label">片段名称</span>
+            <input id="cue-title" class="text-input" type="text" disabled />
+          </label>
+          <label class="inspector-field"><span class="field-label">画面文字</span>
+            <input id="cue-text" class="text-input" type="text" disabled />
+          </label>
+          <div class="timing-fields">
+            <label>
+              <span class="field-label">开始 (秒)</span>
+              <input id="cue-start" class="number-input" type="number" min="0" step="0.033" disabled />
+            </label>
+            <label>
+              <span class="field-label">时长 (秒)</span>
+              <input id="cue-duration" class="number-input" type="number" min="0.033" step="0.033" disabled />
+            </label>
+          </div>
+          <label class="slider-field">
+            <span><span>缩放</span><output id="scale-value">100%</output></span>
+            <input id="cue-scale" type="range" min="50" max="160" value="100" disabled />
+          </label>
+          <label class="slider-field">
+            <span><span>旋转</span><output id="rotation-value">0°</output></span>
+            <input id="cue-rotation" type="range" min="-180" max="180" value="0" disabled />
+          </label>
+          <label class="slider-field">
+            <span><span>透明度</span><output id="opacity-value">100%</output></span>
+            <input id="cue-opacity" type="range" min="0" max="100" value="100" disabled />
+          </label>
+          <label class="slider-field">
+            <span><span>水平位置</span><output id="x-value">0 px</output></span>
+            <input id="cue-x" type="range" min="-420" max="420" value="0" disabled />
+          </label>
+          <label class="slider-field">
+            <span><span>垂直位置</span><output id="y-value">0 px</output></span>
+            <input id="cue-y" type="range" min="-240" max="240" value="0" disabled />
+          </label>
+          <label class="slider-field" id="volume-field" hidden>
+            <span><span>音量</span><output id="volume-value">100%</output></span>
+            <input id="cue-volume" type="range" min="0" max="150" value="100" />
+          </label>
+          <div class="review-field">
+            <label class="field-label" for="review-note">时间点批注</label>
+            <textarea id="review-note" class="text-input" rows="2"></textarea>
+            <button id="add-note" class="button button-quiet" type="button"><i data-lucide="message-square-plus"></i>添加批注</button>
+            <div id="note-list" aria-live="polite"></div>
+          </div>
+          <div class="inspector-footer">
+            <button id="add-title" class="button button-quiet" type="button"><i data-lucide="type"></i>添加标题</button>
+            <button id="delete-cue" class="icon-button danger" type="button" aria-label="删除片段" title="删除片段" disabled><i data-lucide="trash-2"></i></button>
+          </div>
+        </aside>
+
+        <section class="timeline-panel" aria-label="多轨视频时间线">
+          <div class="timeline-toolbar">
+            <div class="timeline-label">
+              <span class="eyebrow">时间线</span>
+              <span id="timeline-duration">8.00 秒</span>
+            </div>
+            <div class="timeline-tools">
+              <button id="undo-button" class="icon-button" type="button" aria-label="撤销" title="撤销" disabled><i data-lucide="undo-2"></i></button>
+              <button id="redo-button" class="icon-button" type="button" aria-label="重做" title="重做" disabled><i data-lucide="redo-2"></i></button>
+              <button id="import-button" class="icon-button" type="button" aria-label="导入音频" title="导入音频"><i data-lucide="audio-lines"></i></button>
+              <input id="audio-file" type="file" accept="audio/*" hidden />
+              <button id="snap-toggle" class="toggle-button" type="button" aria-pressed="true">吸附</button>
+              <label class="zoom-control" for="timeline-zoom">
+                <span>缩放</span>
+                <input id="timeline-zoom" type="range" min="48" max="160" value="96" />
+              </label>
+              <button id="save-button" class="icon-button" type="button" aria-label="保存" title="保存"><i data-lucide="save"></i></button>
+            </div>
+          </div>
+          <div class="timeline-workarea">
+            <div id="track-labels" class="track-labels"></div>
+            <div id="timeline-viewport" class="timeline-viewport" tabindex="0" aria-label="时间线，按左右方向键可逐帧移动播放头">
+              <div id="timeline-content" class="timeline-content">
+                <div id="ruler" class="ruler"></div>
+                <div id="second-index" class="second-index" aria-label="逐秒内容索引"></div>
+                <div id="tracks" class="tracks"></div>
+                <div id="playhead" class="playhead" aria-hidden="true"><span></span></div>
+              </div>
+            </div>
+          </div>
+          <div id="second-summary" class="timeline-hint" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+    <dialog id="plan-dialog">
+      <div class="dialog-heading"><h2>制作方案</h2><button id="close-plan" class="icon-button" aria-label="关闭"><i data-lucide="x"></i></button></div>
+      <div id="plan-content"></div>
+    </dialog>
+    <dialog id="image-tool-dialog">
+      <div class="dialog-heading"><h2>生图工具</h2><button id="close-image-tool" class="icon-button" aria-label="关闭生图工具"><i data-lucide="x"></i></button></div>
+      <form id="image-tool-form">
+        <label class="plan-field"><span>生成方式</span><select id="image-tool-mode" class="text-input"><option value="builtin">内置工具</option><option value="external">外部 API</option></select></label>
+        <label class="plan-field" id="image-backend-field" hidden><span>API 提供商</span><select id="image-tool-backend" class="text-input"></select></label>
+        <div id="image-tool-result" role="status"></div>
+        <button class="button button-primary" type="submit">确认工具方案</button>
+      </form>
+    </dialog>
+    <dialog id="voice-tool-dialog">
+      <div class="dialog-heading"><h2>配音工具</h2><button id="close-voice-tool" class="icon-button" aria-label="关闭配音工具"><i data-lucide="x"></i></button></div>
+      <form id="voice-tool-form">
+        <label class="plan-field"><span>配音方式</span><select id="voice-provider" class="text-input"><option value="provided">上传已有配音</option><option value="minimax">MiniMax API / 音色克隆</option><option value="local">由 Agent 代配（本地系统语音）</option></select></label>
+        <div id="local-voice-options" hidden><p>本地系统语音的自然度、情绪和表现力通常不如 MiniMax 或优质人工录音。</p><div id="editor-local-voices"></div></div>
+        <div id="recording-options" hidden>
+          <label class="plan-field"><span>上传已有配音</span><input id="narration-file" type="file" accept="audio/*" /></label>
+          <label class="plan-field"><span>录音角色</span><select id="narration-speaker" class="text-input"><option value="narrator">旁白 / 暂未区分说话人</option><option value="host-a">主播 A</option><option value="host-b">主播 B</option></select></label>
+          <div id="narration-result" role="status"></div>
+          <button id="apply-narration" class="button button-quiet" type="button" hidden><i data-lucide="captions"></i>加入配音与字幕</button>
+        </div>
+        <fieldset id="minimax-options" hidden>
+          <div class="timing-fields">
+            <label class="plan-field"><span>账户地区</span><select id="voice-region" class="text-input"><option value="cn">国内</option><option value="global">国际</option></select></label>
+            <label class="plan-field"><span>模型</span><select id="voice-model" class="text-input"><option>speech-2.8-turbo</option><option>speech-2.8-hd</option><option>speech-2.6-turbo</option><option>speech-2.6-hd</option></select></label>
+          </div>
+          <div id="voice-speakers"></div>
+          <label class="slider-field"><span>语速 <output id="voice-speed-value">1.00</output></span><input id="voice-speed" type="range" min="0.5" max="2" step="0.05" value="1" /></label>
+          <label class="slider-field"><span>音调 <output id="voice-pitch-value">0</output></span><input id="voice-pitch" type="range" min="-12" max="12" step="1" value="0" /></label>
+        </fieldset>
+        <div id="voice-tool-result" role="status"></div>
+        <button class="button button-primary" type="submit"><i data-lucide="save"></i>保存配音方案</button>
+      </form>
+      <div id="editor-clone" hidden></div>
+      <form id="voice-preview-form" hidden>
+        <label class="plan-field"><span>试听角色</span><select id="voice-preview-speaker" class="text-input"></select></label>
+        <label class="plan-field"><span>试听文本</span><input id="voice-preview-text" class="text-input" maxlength="200" value="欢迎来到 Video Master，今天我们用代码制作视频。" /></label>
+        <label class="plan-field"><input id="voice-authorize" type="checkbox" required />授权此次 MiniMax 付费试听并发送以上文本</label>
+        <button id="voice-preview-button" class="button button-quiet" type="submit"><i data-lucide="volume-2"></i>生成试听</button>
+        <audio id="voice-preview-audio" controls hidden></audio>
+      </form>
+    </dialog>
+    <script type="module" src="/src/editor.js"></script>
+  </body>
+</html>

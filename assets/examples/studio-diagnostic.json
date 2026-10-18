@@ -1,0 +1,33 @@
+{
+  "genre": "studio",
+  "title": "代码演播室镜头测试",
+  "width": 1280,
+  "height": 720,
+  "ticker": "诊断样片 · 矢量测试角色不是最终动漫美术 · 本地系统语音",
+  "lines": [
+    {
+      "speaker": "host-a",
+      "text": "欢迎来到代码演播室。今天，我们用一条时间线连接画面、配音和字幕。",
+      "expression": "excited",
+      "camera": "studio",
+      "headline": "一条时间线",
+      "body": "内容、角色、声音、镜头，统一编排。"
+    },
+    {
+      "speaker": "host-b",
+      "text": "现在推进背景大屏。主播退到小窗，关键内容成为主角。",
+      "expression": "explain",
+      "camera": "screen",
+      "headline": "聚焦大屏",
+      "body": "镜头推进 → 主播小窗 → 返回演播室"
+    },
+    {
+      "speaker": "host-a",
+      "text": "讲完之后，镜头回到演播室。每一秒都可以在编辑器中查看和调整。",
+      "expression": "neutral",
+      "camera": "studio",
+      "headline": "回到演播室",
+      "body": "角色动作、字幕和切镜，来自同一份数据。"
+    }
+  ]
+}

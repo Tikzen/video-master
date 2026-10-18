@@ -1,0 +1,22 @@
+{
+  "assets": [
+    {
+      "kind": "image",
+      "url": "https://images-assets.nasa.gov/image/PIA18033/PIA18033~medium.jpg",
+      "source": "https://images.nasa.gov/details/PIA18033",
+      "credit": "NASA / Suomi NPP / VIIRS",
+      "usage": "NASA educational/informational media guidelines, checked 2026-10-13: acknowledge source, no endorsement; third-party protected material excluded. Review again for advertising, merchandising, or another jurisdiction.",
+      "policy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "title": "Earth / Blue Marble composite"
+    },
+    {
+      "kind": "image",
+      "url": "https://images-assets.nasa.gov/image/PIA22766/PIA22766~orig.jpg",
+      "source": "https://images.nasa.gov/details/PIA22766",
+      "credit": "NASA/JPL-Caltech",
+      "usage": "NASA educational/informational media guidelines, checked 2026-10-13: acknowledge source, no endorsement; this item is an illustration, not a mission photograph.",
+      "policy": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "title": "Cassini orbiting Saturn / illustration"
+    }
+  ]
+}

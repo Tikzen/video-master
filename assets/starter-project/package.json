@@ -1,0 +1,24 @@
+{
+  "name": "video-master-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "editor": "node src/server.mjs",
+    "validate": "node src/validate.mjs",
+    "render": "node src/render.mjs --output renders/temp/final.mp4",
+    "review:motion": "node src/motion-review.mjs",
+    "review:sheet": "node src/contact-sheet.mjs",
+    "review:quality": "node src/quality-review.mjs status",
+    "test": "node --test src/finish.test.mjs src/model.test.mjs src/image-tools.test.mjs src/voice-tools.test.mjs src/voice-clone.test.mjs src/local-tts.test.mjs src/review.test.mjs src/control.test.mjs src/music-tools.test.mjs src/music-builders.test.mjs src/motion.test.mjs src/studio-motion.test.mjs src/composition.test.mjs src/mv-plan.test.mjs src/motion-sfx.test.mjs src/motion-review.test.mjs src/render-window.test.mjs src/quality-rubric.test.mjs src/quality-review.test.mjs",
+    "test:ui": "node --test src/editor.test.mjs src/workflow.test.mjs src/rounds.test.mjs src/music-ui.test.mjs src/quality-ui.test.mjs src/composition-pixels.test.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "1.1.0",
+    "ffprobe-static": "3.1.0",
+    "lucide": "1.56.0"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}

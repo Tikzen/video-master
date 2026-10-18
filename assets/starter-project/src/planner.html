@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video Master · 创作方案</title>
+  <link rel="stylesheet" href="/src/planner.css" />
+  <script defer src="/vendor/lucide.js"></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="/create"><span class="mark">VM</span><strong>VIDEO MASTER</strong></a>
+    <span class="project-name" id="planner-project"></span>
+    <a class="button quiet" href="/"><i data-lucide="sliders-horizontal"></i><span>工作台</span></a>
+  </header>
+  <div class="layout">
+    <aside class="rail">
+      <span class="section-label">当前制作</span>
+      <nav aria-label="制作阶段" id="stage-nav">
+        <button data-stage="stage1"><span>01</span>创作方向<i data-lucide="chevron-right"></i></button>
+        <button data-stage="stage2"><span>02</span>完整方案<i data-lucide="chevron-right"></i></button>
+        <button data-stage="images"><span><i data-lucide="image"></i></span>生图与素材<i data-lucide="chevron-right"></i></button>
+        <button data-stage="voice"><span><i data-lucide="mic"></i></span>配音与音色<i data-lucide="chevron-right"></i></button>
+        <button data-stage="music"><span><i data-lucide="music-2"></i></span>配乐<i data-lucide="chevron-right"></i></button>
+        <button data-stage="quality"><span><i data-lucide="scan-eye"></i></span>实验性自测<i data-lucide="chevron-right"></i></button>
+        <button data-stage="production"><span>03</span>制作与检查<i data-lucide="chevron-right"></i></button>
+        <button data-stage="review"><span><i data-lucide="message-square"></i></span>审阅与确认<i data-lucide="chevron-right"></i></button>
+        <button data-stage="delivery"><span>04</span>成片交付<i data-lucide="chevron-right"></i></button>
+      </nav>
+      <div class="rail-bottom"><span class="agent-dot"></span><span id="agent-status">等待方向确认</span></div>
+    </aside>
+    <main>
+      <div class="page-heading"><div><span class="section-label">CREATIVE WORKFLOW</span><h1 id="stage-title">确认创作方向</h1></div><span id="stage-badge">待确认</span></div>
+      <p id="stage-summary"></p>
+      <div id="planner-content"></div>
+      <div id="planner-message" role="status" aria-live="polite"></div>
+    </main>
+    <aside class="preview-panel" aria-label="当前画面预览">
+      <div class="preview-heading"><span class="section-label">CURRENT PROGRAM</span><strong id="preview-name"></strong></div>
+      <canvas id="planner-canvas" width="640" height="360" aria-label="当前项目画面"></canvas>
+      <div class="preview-transport"><button type="button" id="preview-play" class="button" title="播放画面预览" aria-label="播放画面预览"><i data-lucide="play"></i></button><input id="preview-time" type="range" min="0" max="1" step="0.033333" value="0" aria-label="预览时间" /><output id="preview-readout">0.00s</output></div>
+      <dl id="preview-facts"></dl>
+      <a class="button quiet" href="/"><i data-lucide="sliders-horizontal"></i>时间线微调</a>
+    </aside>
+  </div>
+  <script type="module" src="/src/planner.js"></script>
+</body>
+</html>

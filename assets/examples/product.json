@@ -1,0 +1,38 @@
+{
+  "genre": "product",
+  "title": "Video Master 产品演示",
+  "width": 1280,
+  "height": 720,
+  "accent": "#397e70",
+  "pages": [
+    {
+      "type": "bullets",
+      "title": "让制作流程真正运行",
+      "subtitle": "纯代码视频与可编辑时间线",
+      "narration": "这是一个可运行的视频工作台。场景、声音和时间线，共同组成制作流程。",
+      "bullets": ["默认询问风格", "明确选择后支持一句话完成", "自动制作后保留精修入口"]
+    },
+    {
+      "type": "media",
+      "title": "真实工作台画面",
+      "subtitle": "本项目实际 UI 截图，不是虚构产品界面",
+      "narration": "时间线标记每一秒的内容。选中片段后，可以修剪时间和调整画面参数。",
+      "media": {
+        "kind": "image",
+        "src": "product-ui.png",
+        "title": "Video Master 编辑器实机截图",
+        "fit": "contain"
+      }
+    },
+    {
+      "type": "metrics",
+      "title": "从预览到可播放交付",
+      "narration": "预览与编码共用画面函数。成片检查通过之后，输出可播放的视频。",
+      "metrics": [
+        {"value": "代码", "label": "每个动画帧的来源"},
+        {"value": "多轨", "label": "声音与画面独立编排"},
+        {"value": "MP4", "label": "可验证的最终交付"}
+      ]
+    }
+  ]
+}

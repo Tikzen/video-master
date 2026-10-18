@@ -1,0 +1,35 @@
+{
+  "genre": "report",
+  "title": "Video Master 项目汇报",
+  "width": 1280,
+  "height": 720,
+  "accent": "#c94b3c",
+  "pages": [
+    {
+      "type": "bullets",
+      "title": "从风格到视频",
+      "subtitle": "用户确定方向，Agent 执行制作",
+      "narration": "用户确定风格之后，助手负责素材、声音、分镜和代码制作。",
+      "bullets": ["确认风格和工具", "生成素材与真实配音", "渲染检查并交付视频"]
+    },
+    {
+      "type": "chart",
+      "title": "数据也能动态讲解",
+      "subtitle": "以下为动画示例数据，不是实际项目业绩",
+      "narration": "每一页都有自己的动态效果。柱形依次出现，数字跟随进度变化。",
+      "values": [20, 42, 58, 83],
+      "labels": ["阶段一", "阶段二", "阶段三", "阶段四"],
+      "footer": "示例数据 / 仅用于验证动画"
+    },
+    {
+      "type": "metrics",
+      "title": "可编辑、可复现",
+      "narration": "最终输出可播放的视频，同时保留可编辑时间线和源代码。",
+      "metrics": [
+        {"value": 30, "unit": " fps", "label": "本样片实际输出帧率"},
+        {"value": "MP4", "label": "编码交付格式"},
+        {"value": "JSON", "label": "共享时间线数据"}
+      ]
+    }
+  ]
+}

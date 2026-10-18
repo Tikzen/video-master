@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Master"
+  short_description: "Code-rendered MVs, studio shows, product demos and reports"
+  default_prompt: "Use $video-master to create a complete code-rendered video; ask about missing style first unless I select one-sentence completion."

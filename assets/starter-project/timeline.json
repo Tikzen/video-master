@@ -1,0 +1,96 @@
+{
+  "schema": "video-master.timeline.v1",
+  "duration_seconds": 8,
+  "fps": 30,
+  "tracks": [
+    {"id": "scenes", "kind": "video", "name": "场景", "visible": true, "muted": false, "exclusive": true},
+    {"id": "titles", "kind": "graphics", "name": "标题", "visible": true, "muted": false},
+    {"id": "music", "kind": "music", "name": "音乐", "visible": true, "muted": false}
+  ],
+  "cues": [
+    {
+      "id": "scene-01",
+      "track_id": "scenes",
+      "kind": "scene",
+      "start_sec": 0,
+      "end_sec": 3,
+      "title": "序幕",
+      "scene": "opening",
+      "text": "DESIGNED TO MOVE",
+      "transform": {"x": 0, "y": 0, "scale": 1, "rotation": 0, "opacity": 1},
+      "keyframes": [],
+      "asset_refs": [],
+      "evidence_refs": []
+    },
+    {
+      "id": "scene-02",
+      "track_id": "scenes",
+      "kind": "scene",
+      "start_sec": 3,
+      "end_sec": 6,
+      "title": "主体展示",
+      "scene": "hero",
+      "text": "FORM / FUNCTION",
+      "transform": {"x": 0, "y": 0, "scale": 1, "rotation": 0, "opacity": 1},
+      "keyframes": [],
+      "asset_refs": [],
+      "evidence_refs": []
+    },
+    {
+      "id": "scene-03",
+      "track_id": "scenes",
+      "kind": "scene",
+      "start_sec": 6,
+      "end_sec": 8,
+      "title": "收束",
+      "scene": "closing",
+      "text": "MADE FOR THE MOMENT",
+      "transform": {"x": 0, "y": 0, "scale": 1, "rotation": 0, "opacity": 1},
+      "keyframes": [],
+      "asset_refs": [],
+      "evidence_refs": []
+    },
+    {
+      "id": "title-01",
+      "track_id": "titles",
+      "kind": "title",
+      "start_sec": 0.36666666666666664,
+      "end_sec": 2.8,
+      "title": "主标题",
+      "scene": "opening",
+      "text": "DESIGNED TO MOVE",
+      "transform": {"x": 0, "y": 0, "scale": 1, "rotation": 0, "opacity": 1},
+      "keyframes": [],
+      "asset_refs": [],
+      "evidence_refs": []
+    },
+    {
+      "id": "title-02",
+      "track_id": "titles",
+      "kind": "title",
+      "start_sec": 3.3666666666666667,
+      "end_sec": 5.766666666666667,
+      "title": "副标题",
+      "scene": "hero",
+      "text": "FORM / FUNCTION",
+      "transform": {"x": 0, "y": 0, "scale": 1, "rotation": 0, "opacity": 1},
+      "keyframes": [],
+      "asset_refs": [],
+      "evidence_refs": []
+    },
+    {
+      "id": "music-01",
+      "track_id": "music",
+      "kind": "music",
+      "start_sec": 0,
+      "end_sec": 8,
+      "title": "Procedural Pulse · 120 BPM",
+      "src": "audio/demo-score.wav",
+      "source_offset": 0,
+      "source_duration": 8,
+      "volume": 0.5,
+      "fade_in": 0.1,
+      "fade_out": 0.5
+    }
+  ]
+}

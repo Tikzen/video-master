@@ -1,0 +1,34 @@
+# Private configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Installed dependencies and caches
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+.asr-env/
+.deps/
+.cache/
+cache/
+.motionkit/
+.editor/
+
+# Generated media and local verification
+renders/
+delivery/
+validation/
+voice-samples/
+assets/imports/
+*.log
+*.partial.mp4
+
+# ZIP packages are uploaded as Release assets
+*.zip
+
+.DS_Store
+Thumbs.db
+Desktop.ini

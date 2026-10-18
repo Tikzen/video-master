@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+renders/
+delivery/
+validation/
+.editor/
+audio/demo-score.wav
+assets/imports/
+voice-samples/
+.asr-env/
+.venv/
+__pycache__/

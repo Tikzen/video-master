@@ -1,0 +1,45 @@
+{
+  "id": "host-source",
+  "revision": 1,
+  "title": "主播角色从哪里来",
+  "notice": "不推荐直接使用模板角色：模板只用于调试时间线和镜头，放进成片会显得廉价、与节目风格脱节，也做不出表情变化。请优先上传你的立绘，或由 Agent 原创生成。",
+  "body": "两位主播会贯穿全片，请从下面四种来源中选一种。上传图片时，最好是透明背景的全身或半身立绘，每位主播一张。如果选生图，Agent 会先出 2–3 套角色设计让你挑；之后根据分镜脚本输出《人物差分要求表》，再按表生成表情差分。所有付费调用都会先向你确认请求数量和费用。",
+  "candidates": [
+    {
+      "id": "upload",
+      "label": "上传立绘",
+      "description": "你的立绘直接作为母版使用。只有一张图时，Agent 让整张图做动作，不拆分图层，也不局部拉伸。如果配置了生图 API，还可以按差分表补出各种表情。",
+      "media": "assets/studio-rounds/source-upload.png",
+      "requires_upload": true
+    },
+    {
+      "id": "generate",
+      "label": "生图 API 原创生成",
+      "description": "Agent 先出三套角色设计供你选择，选定后生成母版立绘，再以母版为参考图生成表情差分：每个表情有基础帧、张嘴帧和闭眼帧，切换时替换整张图，不改动脸部形状。",
+      "media": "assets/studio-rounds/source-generate.png",
+      "recommended": true
+    },
+    {
+      "id": "redraw",
+      "label": "上传图片后重绘",
+      "description": "以你上传的图片（参考图、草图或吉祥物）为参考，重绘成风格统一、背景透明的主播立绘，再从重绘图生成差分。请确认你有权使用这些图片。",
+      "media": "assets/studio-rounds/source-redraw.png",
+      "requires_upload": true
+    },
+    {
+      "id": "template",
+      "label": "直接使用内置模板",
+      "description": "使用代码绘制的矢量主播，不需要图片。",
+      "warning": "不推荐。模板角色只适合诊断和调试，放进成片会显得廉价、不精致。需要你在这里明确选择，它才能用于成片。"
+    }
+  ],
+  "allow_upload": {
+    "label": "上传立绘或参考图（每位主播一张，按主播 A、主播 B 的顺序）",
+    "max": 4,
+    "hint": "支持 PNG、JPG、WebP，建议使用透明背景的 PNG。如果图片带背景，Agent 会先询问是否抠图。"
+  },
+  "options": [
+    { "id": "use", "label": "采用所选来源" },
+    { "id": "discuss", "label": "先和 Agent 沟通角色方向", "without_candidate": true }
+  ]
+}

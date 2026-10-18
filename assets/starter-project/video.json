@@ -1,0 +1,12 @@
+{
+  "schema": "video-master.project.v1",
+  "name": "product-motion-study",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration_seconds": 8,
+  "container": "mp4",
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "color_space": "bt709"
+}

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="module">
+      import { renderFrame } from "./scene.js";
+      import { loadVisuals, prepareVisuals } from "./mv.js";
+      import { renderFinished } from "./finish.js";
+      window.renderFrameAt = async (timeline, project, time) => {
+        await loadVisuals(timeline);
+        await prepareVisuals(timeline, time);
+        const canvas = document.querySelector("#canvas");
+        canvas.width = project.width;
+        canvas.height = project.height;
+        // export-time finish (motion blur, bloom, grain, vignette, flashes) from video.json "finish"
+        renderFinished(canvas, project, time, (ctx, t) => renderFrame(ctx, timeline, t, project.width, project.height));
+        return canvas.toDataURL("image/png");
+      };
+    </script>
+  </body>
+</html>
