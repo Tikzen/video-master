@@ -8,6 +8,11 @@ Do not assume the next agent has the current agent's native tools.
 
 ## Bootstrap
 
+For Multiplane, use [renderers/multiplane.md](renderers/multiplane.md) and its
+project-local initializer/doctor instead of assuming JS starter runtime paths.
+Node >=24, matching Chromium and a real FFmpeg encoder probe are required.
+Keep browser, npm, temporary and job directories on the user's permitted drive.
+
 Set `SKILL_DIR` to the absolute folder containing this SKILL.md. Use the
 host's skill discovery mechanism if supported; otherwise load SKILL.md as a
 local instruction file and follow its referenced route. A plain chat-only

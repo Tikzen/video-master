@@ -1,0 +1,14 @@
+{
+  "name": "video-master-multiplane-project",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=24"},
+  "scripts": {
+    "doctor": "node tools/multiplane.mjs doctor",
+    "lint": "node tools/multiplane.mjs lint",
+    "verify": "node tools/multiplane.mjs verify",
+    "render": "node tools/multiplane.mjs render"
+  },
+  "dependencies": {"multiplane": "0.3.13"}
+}

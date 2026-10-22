@@ -1,4 +1,4 @@
-import { trackEnabled } from "./model.js";
+import { trackEnabled } from "./track-state.js";
 
 export function voiceIntervals(timeline){
   const intervals=timeline.cues.filter((cue)=>cue.kind==="voice"&&(cue.volume??1)>0&&trackEnabled(timeline,cue))

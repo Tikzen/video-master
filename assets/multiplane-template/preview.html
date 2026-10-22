@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Code film preview</title>
+<style>html,body{margin:0;background:#0a1421;color:#dce9ee;font:14px Arial}main{height:calc(100vh - 64px);display:grid;place-items:center}canvas{max-width:100%;max-height:100%;aspect-ratio:16/9}footer{height:64px;display:flex;align-items:center;gap:18px;padding:0 24px}input{flex:1}button{padding:10px 24px;border:0;border-radius:8px;background:#78e9d7;cursor:pointer}</style>
+<main><canvas></canvas></main><footer><button id="play">Play</button><input id="seek" type="range" min="0" step="0.001"><span id="time"></span></footer>
+<script type="module">
+import {setup,drawAt} from './src/scene.js';
+import {voiceIntervals,playbackGain} from './tools/timeline/audio-mix.js';
+import {trackEnabled} from './tools/timeline/track-state.js';
+const project=await fetch('./video.json').then(r=>r.json()),timeline=await fetch('./timeline.json').then(r=>r.json());
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');canvas.width=project.width;canvas.height=project.height;
+await setup({project,timeline,canvas});await document.fonts.ready;
+const cues=timeline.cues.filter(c=>['music','voice','sfx'].includes(c.kind)&&trackEnabled(timeline,c));
+const sound=new AudioContext();
+const audio=cues.map(cue=>{const element=new Audio(cue.src),gain=sound.createGain();sound.createMediaElementSource(element).connect(gain);gain.connect(sound.destination);return {cue,element,gain};}),speaking=voiceIntervals(timeline);
+const seek=document.querySelector('#seek'),button=document.querySelector('#play');seek.max=project.duration_seconds;
+let playing=false,started=0,time=0;
+function draw(){ctx.reset();drawAt(ctx,time,{project,timeline});seek.value=time;document.querySelector('#time').textContent=time.toFixed(2)+' / '+project.duration_seconds.toFixed(2);}
+function stop(){playing=false;button.textContent='Play';for(const item of audio)item.element.pause();}
+function sync(){for(const {cue,element,gain} of audio){const active=time>=cue.start_sec&&time<cue.end_sec;if(active){element.currentTime=(cue.source_offset||0)+time-cue.start_sec;gain.gain.value=playbackGain(cue,speaking,time);if(playing)element.play().catch(error=>{button.title=error.message;});}else element.pause();}}
+button.onclick=async()=>{if(playing)return stop();await sound.resume();if(time>=project.duration_seconds)time=0;playing=true;started=performance.now()-time*1000;button.textContent='Pause';sync();};
+seek.oninput=()=>{time=+seek.value;started=performance.now()-time*1000;sync();draw();};
+function frame(now){if(playing){time=Math.min(project.duration_seconds,(now-started)/1000);for(const {cue,element,gain}of audio){if(time>=cue.start_sec&&time<cue.end_sec){gain.gain.value=playbackGain(cue,speaking,time);if(element.paused){element.currentTime=(cue.source_offset||0)+time-cue.start_sec;element.play().catch(error=>{button.title=error.message;});}}else element.pause();}if(time>=project.duration_seconds)stop();draw();}requestAnimationFrame(frame);}
+draw();requestAnimationFrame(frame);
+</script>

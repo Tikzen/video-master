@@ -1,6 +1,8 @@
 import { validateFinish } from "./finish.js";
 import { validateMotion, validateComposition, validateAnimationSpan, animationDuration } from "./composition.js";
 import { validateTransition } from "./composition-transitions.js";
+import { isAudio, trackEnabled } from "./track-state.js";
+export { isAudio, trackEnabled } from "./track-state.js";
 
 export const clone = (value) => JSON.parse(JSON.stringify(value));
 export const frame = (seconds, fps) => Math.round(seconds * fps) / fps;
@@ -11,11 +13,6 @@ export function timecode(seconds, fps) {
     Math.floor(f / fps) % 60, f % fps]
     .map((n) => String(n).padStart(2, "0")).join(":");
 }
-export const isAudio = (cue) => ["music", "voice", "sfx"].includes(cue.kind);
-export const trackEnabled = (timeline, cue) => {
-  const track = timeline.tracks.find((row) => row.id === cue.track_id);
-  return !!track && (isAudio(cue) ? !track.muted : track.visible);
-};
 
 export function validate(project, timeline) {
   const errors = [];

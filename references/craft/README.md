@@ -2,8 +2,8 @@
 
 This folder replaces quota rules ("≥3 materials", "20–35 layers") with the method that actually
 produces good motion design. It applies to all three genres — **MV / showreel**, **studio
-(演播室)**, **presentation (演示: product demo, launch, report)** — and to both renderers
-(motionkit code films and the JS compositor). The WebUI/workbench and the route gates in
+(演播室)**, **presentation (演示: product demo, launch, report)** — across motionkit code films,
+the JS compositor and the optional Multiplane backend. The WebUI/workbench and the route gates in
 `workflows/` are unchanged; this is what you do *inside* treatment, storyboard, scene authoring
 and QA.
 
@@ -58,7 +58,7 @@ Video Master outputs actually showed.
 | Studio | `assets/examples/code-film-studio-timeline` | speech clock, shot grammar, screen push + PIP, captions, lower thirds |
 | Presentation | `assets/examples/code-film-present-launch` | reading order, fixed-axis chart morph, UI camera + cursor, labelled demo data |
 
-Start a new piece with `scripts/init_code_film.py` (blank template or `--from-example`).
+Start a motionkit piece with `scripts/init_code_film.py` (blank template or `--from-example`).
 Engine reference: [../motionkit-api.md](../motionkit-api.md).
 
 ## Choosing the renderer
@@ -69,6 +69,10 @@ Engine reference: [../motionkit-api.md](../motionkit-api.md).
 - **JS compositor** (starter project / `create-program.mjs`): use for fast narration-driven
   reports and studio shows that fit its layouts. It has the same easing vocabulary, glyph
   text, post and motion blur (see `composition-format.md`). Apply this craft standard there too.
+- **Multiplane** (optional browser backend): use when HTML/Canvas/WebGL authoring
+  fits and parallel capture, cut-aware blur or resumable jobs help. Read
+  [../renderers/multiplane.md](../renderers/multiplane.md). Renderer selection
+  changes execution, not the concept, event clock, handoffs or quality bar.
 
 ## Keep a WORKLOG
 

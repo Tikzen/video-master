@@ -1,0 +1,12 @@
+{
+  "schema": "video-master.project.v1",
+  "name": "code-mv",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration_seconds": 10,
+  "container": "mp4",
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "color_space": "bt709"
+}

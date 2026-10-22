@@ -20,6 +20,11 @@ class DistributionTest(unittest.TestCase):
                 names = archive.namelist()
                 self.assertEqual(archive.testzip(), None)
                 self.assertIn("video-master/SKILL.md", names)
+                for resource in ("scripts/init_multiplane.py", "engine/multiplane/runner.mjs",
+                                 "references/renderers/multiplane.md", "assets/multiplane-template/shot.html",
+                                 "assets/multiplane-template/preview.html", "assets/multiplane-template/package.json",
+                                 "assets/starter-project/src/track-state.js"):
+                    self.assertIn(f"video-master/{resource}", names)
                 self.assertIn("video-master/scripts/review_motion.py", names)
                 self.assertIn("video-master/scripts/start_workbench.py", names)
                 self.assertIn("video-master/scripts/agent_control.py", names)
@@ -38,7 +43,7 @@ class DistributionTest(unittest.TestCase):
                 self.assertNotIn("video-master/assets/starter-project/audio/demo-score.wav", names)
                 for name in names:
                     parts = Path(name).parts
-                    self.assertFalse(set(parts).intersection({"node_modules", "__pycache__", ".git", ".editor", "voice-samples", "delivery", "renders", "validation", ".venv", ".asr-env"}))
+                    self.assertFalse(set(parts).intersection({"node_modules", "__pycache__", ".git", ".editor", "voice-samples", "delivery", "renders", "validation", ".venv", ".asr-env", ".runtime", ".deps", "projects"}))
                     self.assertFalse(name.endswith(".pyc"))
                     self.assertFalse(Path(name).name.startswith(".env") and Path(name).name != ".env.example")
                 for genre in ("mv", "studio", "product", "report"):
@@ -62,6 +67,26 @@ class DistributionTest(unittest.TestCase):
             self.assertFalse((output / ".env").exists())
             self.assertFalse((output / "node_modules").exists())
             self.assertFalse((output / "audio/demo-score.wav").exists())
+
+    def test_optional_renderer_initializes_offline_and_preserves_existing_projects(self):
+        import json
+        with tempfile.TemporaryDirectory(prefix="vm-multiplane-init-") as folder:
+            output = Path(folder) / "project"
+            command = [sys.executable, "-B", str(SKILL / "scripts/init_multiplane.py"), str(output),
+                       "--width", "640", "--height", "360", "--duration", "3", "--fps", "24"]
+            subprocess.run(command, check=True, capture_output=True)
+            self.assertEqual(json.loads((output / "video.json").read_text())["duration_seconds"], 3)
+            self.assertIn("width:640px;height:360px", (output / "shot.html").read_text())
+            self.assertTrue((output / "tools/timeline/track-state.js").is_file())
+            self.assertTrue((output / "preview.html").is_file())
+            self.assertFalse((output / "node_modules").exists())
+            original = (output / "video.json").read_bytes()
+            refused = subprocess.run(command, capture_output=True)
+            self.assertNotEqual(refused.returncode, 0)
+            self.assertEqual((output / "video.json").read_bytes(), original)
+            invalid = subprocess.run([*command[:3], str(Path(folder) / "invalid"), "--duration", "nan"], capture_output=True)
+            self.assertNotEqual(invalid.returncode, 0)
+            self.assertFalse((Path(folder) / "invalid").exists())
 
 
 if __name__ == "__main__":

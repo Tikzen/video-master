@@ -1,0 +1,8 @@
+{
+  "schema": "video-master.timeline.v1",
+  "duration_seconds": 10,
+  "fps": 30,
+  "tracks": [],
+  "cues": [],
+  "cuts": []
+}

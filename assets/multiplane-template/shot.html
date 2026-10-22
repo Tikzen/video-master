@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Code film</title>
+<link rel="stylesheet" href="/multiplane/runtime/shot.css">
+<style>#stage{width:1920px;height:1080px;background:#101c2d}canvas{display:block;width:100%;height:100%}</style>
+<div id="stage"><canvas></canvas></div>
+<script type="module">
+import {setup,drawAt,post,blurAt} from './src/scene.js';
+const stage=document.querySelector('#stage'),canvas=stage.querySelector('canvas');
+let project,timeline,context;
+const ready=Promise.all([fetch('./video.json').then(r=>r.json()),fetch('./timeline.json').then(r=>r.json())])
+  .then(async ([p,tl])=>{
+    project=p;timeline=tl;
+    stage.style.width=p.width+'px';stage.style.height=p.height+'px';
+    const ratio=window.devicePixelRatio||1;
+    canvas.width=p.width*ratio;canvas.height=p.height*ratio;
+    context=canvas.getContext('2d');
+    await setup({project,timeline,canvas});
+    await document.fonts.ready;
+  });
+window.SHOT={
+  get duration(){return project?.duration_seconds||10},
+  get fps(){return project?.fps||30},
+  get cuts(){return timeline?.cuts||[]},
+  ready,post,blurAt,
+  render(t){
+    context.reset();context.scale(canvas.width/project.width,canvas.height/project.height);
+    drawAt(context,t,{project,timeline});
+  }
+};
+</script>

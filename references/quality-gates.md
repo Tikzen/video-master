@@ -25,6 +25,11 @@ Before scene authoring:
 
 ## Gate B: Code and Representative Preview
 
+For Multiplane projects use `stills`, `verify` and short `render --from --to`
+equivalents from [renderers/multiplane.md](renderers/multiplane.md). Its receipt
+adds encoder/format/full-decode checks; content, framing, audio and acceptance
+gates below still apply.
+
 After a coherent code batch and before a full render:
 
 - Run syntax/build/tests and the timeline/project validator.

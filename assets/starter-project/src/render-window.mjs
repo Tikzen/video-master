@@ -1,4 +1,4 @@
-import { isAudio, trackEnabled } from "./model.js";
+import { isAudio, trackEnabled } from "./track-state.js";
 
 export function renderWindow(timeline, { start = 0, duration, fps = timeline.fps } = {}) {
   if (!Number.isInteger(fps) || fps <= 0 || !Number.isFinite(start) || start < 0) {

@@ -1,0 +1,8 @@
+{
+  "schema": "video-master.multiplane.v1",
+  "shot": "shot.html",
+  "raster": "gpu",
+  "encoder": "x264",
+  "workers": 2,
+  "requires_async_media": false
+}

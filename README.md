@@ -1,6 +1,18 @@
+# v0.3.0 更新说明
+
+- **新增可选 Multiplane 渲染后端**：支持浏览器场景的并行捕获、硬切边界感知运动模糊，以及已完成分段的断点恢复。
+- **延续现有制作能力**：保留 Motionkit、网页工作台和演播室逻辑；新后端复用多轨音量、对白压低及平滑恢复策略。
+- **增加初始化与检查工具**：独立工程初始化、编码器实测、确定性检查、完整解码检查与 SHA-256 交付回执。
+- **补充实际验证片**：原创 10 秒 MV《TIDAL》，1920×1080、30fps，含代码动画、配乐和转场。
+- **使用边界**：可选后端要求 Node.js 24+；首版支持同步场景绘制，异步视频 seek 沿用原渲染路径。GPU 绘图与硬件编码分开配置，不承诺固定提速比例。
+
+下载：[v0.3.0 Skill 安装包](https://github.com/Tikzen/video-master/releases/tag/v0.3.0)。详细用法见下方说明与 [`references/renderers/multiplane.md`](references/renderers/multiplane.md)。
+
+---
+
 # 武汉1024黑客松参赛作品
 
-## Video Master · v0.2.0
+## Video Master · v0.3.0
 
 **让代码承担制作，把创意留给你。**
 
@@ -10,7 +22,7 @@ Video Master 是一个面向编码智能体的 **视频制作 Skill**。你描�
 
 项目仓库：[Tikzen/video-master](https://github.com/Tikzen/video-master)
 
-> 当前首个发布版本：**v0.2.0**。项目持续开发中。它需要一个能够读写文件、执行命令和编写代码的智能体，以及本地运行环境；单独把 Skill 发给一个只能文字聊天的模型，无法完成视频制作。
+> 当前版本：**v0.3.0**，新增可选的 Multiplane 渲染后端。项目持续开发中。它需要一个能够读写文件、执行命令和编写代码的智能体，以及本地运行环境；单独把 Skill 发给一个只能文字聊天的模型，无法完成视频制作。
 
 ![Video Master 双主持人演播室成片：蓝白大屏、角色、界面素材与字幕](docs/images/studio.webp)
 
@@ -68,11 +80,23 @@ Video Master 是一个面向编码智能体的 **视频制作 Skill**。你描�
 
 *交付页截图：已完成项目的 8 分 37 秒、1080p、30fps MP4，可在网页播放，并保留工程预览入口。截图展示该案例的交付结果，不代表所有视频采用相同长度或版式。*
 
+### 7. 可选 Multiplane 后端：并行捕获、运动模糊与断点恢复
+
+v0.3.0 增加基于 **Multiplane 0.3.13** 的可选渲染路径，适合按绝对时间绘制的 HTML、CSS、SVG、Canvas 和 WebGL 场景。支持多工作进程捕获、避开硬切边界的时间采样运动模糊，以及有已完成分段时的断点恢复。
+
+接入保留原有网页工作台、演播室显示状态、多轨混音和 Motionkit 引擎。新路径共用音量、对白压低与恢复曲线，导出后执行解码检查并生成带 SHA-256 的回执。
+
+GPU 绘图和 GPU 编码分别配置；并行捕获和额外采样的实际收益取决于场景与硬件，**没有统一提速百分比**。首版要求同步绘制，异步视频逐帧 seek 仍使用原有渲染路径。
+
+![TIDAL：v0.3.0 渲染后端验证片的实际编码画面](docs/images/tidal.webp)
+
+*本次接入制作的原创 10 秒 MV《TIDAL》：1080p、30fps，代码画面配原创程序化配乐。配图提取自实际编码成片，视频文件不随 Release 分发。*
+
 ## 安装
 
 ### 方式一：使用 Skill 安装包
 
-1. 下载 **v0.2.0 Release** 附件中的 Skill ZIP。
+1. 下载 [**v0.3.0 Release**](https://github.com/Tikzen/video-master/releases/tag/v0.3.0) 附件中的 `video-master-v0.3.0.zip`。
 2. 解压后得到 `video-master` 文件夹，其中应直接包含 `SKILL.md`。
 3. 将整个文件夹放到你的智能体支持的 Skill 目录。支持项目级 `.agents/skills` 的环境可使用下面的结构。
 4. 按宿主工具的方式重新加载 Skill，然后在对话中明确要求使用 `video-master`。
@@ -88,7 +112,7 @@ Video Master 是一个面向编码智能体的 **视频制作 Skill**。你描�
          └─ ...
 ```
 
-本次准备的安装包文件名为 `video-master-20261016-studio-casting.zip`；它对应本次 **v0.2.0** 发布。压缩包中的日期是文件命名的一部分，发布版本以 Release 标签为准。
+当前安装包文件名为 `video-master-v0.3.0.zip`。GitHub 自动生成的 Source code 归档用于查看仓库源码；直接安装 Skill 时优先使用上述附件。
 
 如果宿主不自动识别 Skill，可以让智能体直接读取该目录的 `SKILL.md`，然后遵循其中的工作流。
 
@@ -108,7 +132,7 @@ git clone https://github.com/Tikzen/video-master.git .agents/skills/video-master
 | --- | --- |
 | 可执行命令、读写文件的编码智能体 | 读取 Skill、设计方案、编写和执行工程代码 |
 | Python 3.10+ | 工作流脚本、素材处理和部分动画能力 |
-| Node.js 22+，推荐 24；npm | 本地网页工作台与 JavaScript 渲染流程 |
+| Node.js 22+，推荐 24；npm | 本地网页工作台与 JavaScript 渲染流程；可选 Multiplane 后端要求 Node.js 24+ |
 | Playwright Chromium | 浏览器渲染与画面检查，按需安装 |
 | FFmpeg / FFprobe | 音视频处理、编码及文件信息检查 |
 | 配音、生图等服务配置 | 按所选制作方案启用，不是所有项目都需要 |
@@ -180,7 +204,7 @@ video-master/
 ├─ workflows/               创建、修改及不同视频类型的工作流
 ├─ references/              创作方法、运行环境、接口与质量检查
 ├─ scripts/                 初始化、网页工作台、素材和打包工具
-├─ engine/                  Motionkit 代码动画引擎
+├─ engine/                  Motionkit 引擎与可选 Multiplane 适配器
 ├─ assets/                  工程起点、示例与网页素材
 ├─ vendor/                  第三方组件、来源说明与许可证
 ├─ requirements-audio.txt   可选音频处理依赖
@@ -214,3 +238,5 @@ video-master/
 感谢 **[hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)**，为 Video Master 的工作流组织与交互确认机制提供了项目灵感。部分图片适配组件复用了其实现，对应来源、改动边界和许可证保存在 `vendor/ppt-master/` 与 `references/ppt-master-migration.md`。
 
 同时感谢项目所使用的第三方组件、字体和相关工具的作者。Video Master 是独立项目，并非 PPT Master 的官方发行版。
+
+v0.3.0 的可选浏览器渲染后端接入了 **[LBEILC/Multiplane](https://github.com/LBEILC/Multiplane)**，感谢其提供并行捕获、后期采样与作业恢复能力。上游通过固定版本 npm 依赖按需安装，其许可证与声明随对应依赖分发。

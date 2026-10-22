@@ -131,6 +131,7 @@ Reference films with source: `assets/examples/code-film-dian-xian-mian` (MV),
 | Two-stage user interaction and review surfaces | [references/interaction-contract.md](references/interaction-contract.md) |
 | Video brief/spec/lock/timeline shape | [references/production-contract.md](references/production-contract.md) |
 | Code renderer and actual MP4 creation | [references/rendering.md](references/rendering.md) |
+| Optional parallel HTML renderer, resumable jobs and cut-aware blur | [references/renderers/multiplane.md](references/renderers/multiplane.md), `scripts/init_multiplane.py` |
 | Quality bar and method (concept, system, clock, handoffs, motion, type, finish, sound, review) | [references/craft/README.md](references/craft/README.md) |
 | Genre craft: MV/showreel · studio · presentation | [genre-mv](references/craft/genre-mv.md) · [genre-studio](references/craft/genre-studio.md) · [genre-presentation](references/craft/genre-presentation.md) |
 | Code-film engine (motionkit), project init, reference films | [references/motionkit-api.md](references/motionkit-api.md), `scripts/init_code_film.py`, `assets/examples/code-film-*` |
@@ -203,9 +204,13 @@ any studio or presentation piece that needs custom choreography, particles, 3D,
 variable-font type, live transitions or post, create a motionkit code film with
 `scripts/init_code_film.py` inside the episode project (see
 `references/motionkit-api.md` and the three `assets/examples/code-film-*` films).
+For browser-authored scenes, the optional Multiplane backend provides parallel
+capture, cut-aware temporal blur and resumable export; use
+`scripts/init_multiplane.py` and `references/renderers/multiplane.md` when that
+execution model fits. Its initial adapter requires synchronous scene drawing.
 Narration-driven reports and studio shows that fit the program builder can stay on
 the JS compositor (`references/composition-format.md`), which shares the same easing,
-glyph-text, post and motion-blur vocabulary. Either way, keep preview/export on the
+glyph-text, post and motion-blur vocabulary. For every backend, keep preview/export on the
 same clock, keep the WebUI/Agent API working, and never claim that an unsupported
 JSON label executes.
 For an energetic MV/showreel, don't confuse animation with shaking one image,

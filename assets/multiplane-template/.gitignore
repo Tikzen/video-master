@@ -1,0 +1,7 @@
+node_modules/
+.runtime/
+renders/
+delivery/
+validation/
+__pycache__/
+.env

@@ -14,7 +14,7 @@ def main():
     if output.exists():
         raise SystemExit("Refusing to overwrite an existing package")
     output.parent.mkdir(parents=True,exist_ok=True)
-    excluded={"node_modules","__pycache__", ".editor", ".git","delivery","renders","validation","voice-samples",".asr-env",".venv","cache",".motionkit"}
+    excluded={"node_modules","__pycache__", ".editor", ".git","delivery","renders","validation","voice-samples",".asr-env",".venv","cache",".motionkit",".runtime",".deps","projects"}
     omitted_files={Path("assets/starter-project/assets/catalog")/f"{genre}.png"
                    for genre in ("mv","studio","product","report")}
     omitted_files.add(Path("assets/starter-project/audio/demo-score.wav"))
@@ -34,6 +34,9 @@ def main():
         names=archive.namelist()
         assert "video-master/SKILL.md" in names
         for required in ("scripts/start_workbench.py", "scripts/agent_control.py",
+                         "scripts/init_multiplane.py", "engine/multiplane/runner.mjs",
+                         "references/renderers/multiplane.md", "assets/multiplane-template/shot.html", "assets/multiplane-template/preview.html",
+                         "assets/multiplane-template/package.json", "assets/starter-project/src/track-state.js",
                          "references/agent-workbench.md", "references/interaction-contract.md",
                          "assets/starter-project/src/planner.html",
                          "assets/starter-project/src/planner.js",

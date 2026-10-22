@@ -55,6 +55,12 @@ Default renderer for an art-directed MV is a motionkit code film:
 remains available for simpler pieces. `scripts/validate_diversity.py` is advisory only; passing
 it does not demonstrate quality, and failing it does not block a well-crafted film.
 
+When the request selects Multiplane, follow
+[renderers/multiplane.md](../../references/renderers/multiplane.md) instead of
+initializing motionkit. Author the same event-driven scene and sound system;
+use upstream stills/verify for preflight. The selected renderer changes execution,
+not craft, review permissions or independent audio-stem requirements.
+
 ## Media
 
 Research 3–8 relevant images/short clips when network material is in scope.

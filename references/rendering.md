@@ -15,6 +15,12 @@ code-rendered; footage and images are inputs, not the renderer.
      composition is naturally component/timeline based.
    - An established specialist renderer for equation-heavy, diagrammatic, or
      other domain-specific motion.
+   - **Multiplane** as an optional HTML/Canvas/WebGL backend for parallel capture,
+     resumable export and cut-aware motion blur. Read
+     [renderers/multiplane.md](renderers/multiplane.md); initialize with
+     `scripts/init_multiplane.py`. This first adapter rejects asynchronous
+     footage seeks and active legacy finish settings. Retain the existing
+     backend for unsupported projects.
    - **motionkit code film** (bundled Python engine) when the treatment needs
      showcase-level choreography: MV/showreels, brand or abstract films, and studio or
      presentation pieces with custom staging, particles, 3D point clouds,
