@@ -3,7 +3,6 @@
 - **新增可选 Multiplane 渲染后端**：支持浏览器场景的并行捕获、硬切边界感知运动模糊，以及已完成分段的断点恢复。
 - **延续现有制作能力**：保留 Motionkit、网页工作台和演播室逻辑；新后端复用多轨音量、对白压低及平滑恢复策略。
 - **增加初始化与检查工具**：独立工程初始化、编码器实测、确定性检查、完整解码检查与 SHA-256 交付回执。
-- **补充实际验证片**：原创 10 秒 MV《TIDAL》，1920×1080、30fps，含代码动画、配乐和转场。
 - **使用边界**：可选后端要求 Node.js 24+；首版支持同步场景绘制，异步视频 seek 沿用原渲染路径。GPU 绘图与硬件编码分开配置，不承诺固定提速比例。
 
 下载：[v0.3.0 Skill 安装包](https://github.com/Tikzen/video-master/releases/tag/v0.3.0)。详细用法见下方说明与 [`references/renderers/multiplane.md`](references/renderers/multiplane.md)。
